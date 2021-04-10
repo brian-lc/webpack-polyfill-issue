@@ -1,6 +1,17 @@
 class MediaAccessManager {
 
-  static requestAccessFor(ownerAddress) {
+  
+
+  static requestAccessFor(userAddress) {
+    const NETLIFY_FUNC =
+      'priceless-mayer-402b9f.netlify.app.netlify.com/.netlify/functions';
+      fetch(
+        `https://${NETLIFY_FUNC}/check-ownership?address=${userAddress}`
+      )
+        .then(x => x.json())
+        .then(x => {
+          console.log('HERE', x);
+        })
     
     const mediaObjects = {
       media: {
