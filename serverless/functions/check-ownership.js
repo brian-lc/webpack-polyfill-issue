@@ -22,13 +22,15 @@ const handler = async (event) => {
     console.log('hldrAddress', holderAddress);
 
     var media = {};
-    if (userAddress === holderAddress) {
+    if (userAddress.trim() === holderAddress.trim()) {
       // if user matches holder, return the media paths
       console.log('ADDRESS MATCH');
       media = {
         raw_media_path: 'https://filesamples.com/samples/audio/wav/Symphony%20No.6%20(1st%20movement).wav',
         preview_media_path: 'https://filesamples.com/samples/audio/mp3/Symphony%20No.6%20(1st%20movement).mp3'
       };
+    } else {
+      console.log('NO MATCH');
     }
 
     return {
