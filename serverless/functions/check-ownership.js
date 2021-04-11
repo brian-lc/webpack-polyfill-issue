@@ -12,33 +12,42 @@ const handler = async (event) => {
     
     console.log('query', query);
 
+    const resp = await fetch(query, options);
+    const jresp = await resp.json();
+    console.log(jresp);
+
+    return {
+      statusCode: 201,
+      body: JSON.stringify({ media: {foo: 'foo'}});
+    }
+
     // Getting the latest details on the token holder
-    fetch(query, options)
-      .then(response => response.json())
-      .then(response => {
+    // fetch(query, options)
+    //   .then(response => response.json())
+    //   .then(response => {
 
-        console.log('OpenSeaResponse', response);
-        const holderAddress = response['assets'][0]['owner']['address'];
+    //     console.log('OpenSeaResponse', response);
+    //     const holderAddress = response['assets'][0]['owner']['address'];
 
-        // Pulling the userAddress from the query params
-        const userAddress = event.queryStringParameters.address;
-        console.log('userAddress', userAddress);
-        console.log('holderAddress', holderAddress);
+    //     // Pulling the userAddress from the query params
+    //     const userAddress = event.queryStringParameters.address;
+    //     console.log('userAddress', userAddress);
+    //     console.log('holderAddress', holderAddress);
 
-        var media = {};
-        if (userAddress == holderAddress) {
-          // if user matches holder, return the media paths
-          media = {
-            raw_media_path: 'https://filesamples.com/samples/audio/wav/Symphony%20No.6%20(1st%20movement).wav',
-            preview_media_path: 'https://filesamples.com/samples/audio/mp3/Symphony%20No.6%20(1st%20movement).mp3'
-          };
-        }
-        return {
-          statusCode: 200,
-          body: JSON.stringify({ media: media }),
-        }
-      })
-      .catch(err => console.error(err));
+    //     var media = {};
+    //     if (userAddress == holderAddress) {
+    //       // if user matches holder, return the media paths
+    //       media = {
+    //         raw_media_path: 'https://filesamples.com/samples/audio/wav/Symphony%20No.6%20(1st%20movement).wav',
+    //         preview_media_path: 'https://filesamples.com/samples/audio/mp3/Symphony%20No.6%20(1st%20movement).mp3'
+    //       };
+    //     }
+    //     return {
+    //       statusCode: 200,
+    //       body: JSON.stringify({ media: media }),
+    //     }
+    //   })
+    //   .catch(err => console.error(err));
     
   } catch (error) {
     return { statusCode: 500, body: error.toString() }
