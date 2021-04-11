@@ -19,11 +19,12 @@ const handler = async (event) => {
     const holderAddress = jresp['assets'][0]['owner']['address'];
     const userAddress = event.queryStringParameters.address;
     console.log('userAddress', userAddress);
-    console.log('holderAddress', holderAddress);
+    console.log('hldrAddress', holderAddress);
 
     var media = {};
-    if (userAddress == holderAddress) {
+    if (userAddress.equals(holderAddress)) {
       // if user matches holder, return the media paths
+      console.log('ADDRESS MATCH');
       media = {
         raw_media_path: 'https://filesamples.com/samples/audio/wav/Symphony%20No.6%20(1st%20movement).wav',
         preview_media_path: 'https://filesamples.com/samples/audio/mp3/Symphony%20No.6%20(1st%20movement).mp3'
@@ -31,7 +32,7 @@ const handler = async (event) => {
     }
 
     return {
-      statusCode: 201,
+      statusCode: 200,
       body: JSON.stringify({ media: media})
     }
 
