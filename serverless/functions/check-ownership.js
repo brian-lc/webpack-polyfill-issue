@@ -12,10 +12,7 @@ const handler = async (event) => {
     console.log('query', queryFragment);
 
     // Getting the latest details on the token holder
-    fetch(`https://api.opensea.io/api/v1/assets?
-      order_direction=desc&
-      offset=0&
-      limit=20&${queryFragment}`, options)
+    fetch(`https://api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=1&${queryFragment}`, options)
       .then(response => response.json())
       .then(response => {
 
