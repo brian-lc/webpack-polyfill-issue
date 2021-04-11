@@ -18,32 +18,34 @@ const handler = async (event) => {
       offset=0&
       limit=20&${queryFragment}`, options)
       .then(response => {
-        console.log('OpenSeaResponse', response)
+
+        console.log('OpenSeaResponse', response);
         const tokenDetail = JSON.parse(response.body);
         holderAddress = tokenDetail['assets'][0]['owner']['address'];
+
+        // Pulling the userAddress from the query params
+        const userAddress = event.queryStringParameters.address;
+        console.log('userAddress', userAddress);
+        console.log('holderAddress', holderAddress);
+
+        var media = {};
+        if (userAddress == holderAddress) {
+          // if user matches holder, return the media paths
+          media = {
+            raw_media_path: 'https://filesamples.com/samples/audio/wav/Symphony%20No.6%20(1st%20movement).wav',
+            preview_media_path: 'https://filesamples.com/samples/audio/mp3/Symphony%20No.6%20(1st%20movement).mp3'
+          };
+        }
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ media: media }),
+          // headers: { "headerName": "headerValue", ... },
+          // isBase64Encoded: true,
+        }
+
       })
       .catch(err => console.error(err));
-
-    // Pulling the userAddress from the query params
-    const userAddress = event.queryStringParameters.address
-    console.log('userAddress', userAddress);
-    console.log('holderAddress', holderAddress);
-
-    var media = {};
-    if (userAddress == holderAddress) {
-      // if user matches holder, return the media paths
-      media = {
-        raw_media_path: 'https://filesamples.com/samples/audio/wav/Symphony%20No.6%20(1st%20movement).wav',
-        preview_media_path: 'https://filesamples.com/samples/audio/mp3/Symphony%20No.6%20(1st%20movement).mp3'
-      };
- 
-    }
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ media: media }),
-      // headers: { "headerName": "headerValue", ... },
-      // isBase64Encoded: true,
-    }
+    
   } catch (error) {
     return { statusCode: 500, body: error.toString() }
   }
