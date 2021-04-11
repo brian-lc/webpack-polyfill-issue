@@ -13,9 +13,7 @@ class HolderMedia extends React.Component {
 
  componentDidMount() {
     const { userAccount } = this.state;
-    const NETLIFY_ROOT =
-      'http://localhost:51592/.netlify/functions';
-      //'https://priceless-mayer-402b9f.netlify.app/.netlify/functions';
+    const NETLIFY_ROOT = 'https://priceless-mayer-402b9f.netlify.app/.netlify/functions';
 
     // after mounting query to determine if we should display content 
     fetch(`${NETLIFY_ROOT}/check-ownership?address=${userAccount}`)
