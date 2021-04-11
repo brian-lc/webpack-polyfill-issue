@@ -22,7 +22,7 @@ const handler = async (event) => {
     console.log('hldrAddress', holderAddress);
 
     var media = {};
-    if (userAddress.trim() === holderAddress.trim()) {
+    if (userAddress.trim().toLowerCase() === holderAddress.trim().toLowerCase()) {
       // if user matches holder, return the media paths
       console.log('ADDRESS MATCH');
       media = {
