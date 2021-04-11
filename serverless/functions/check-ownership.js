@@ -14,11 +14,25 @@ const handler = async (event) => {
 
     const resp = await fetch(query, options);
     const jresp = await resp.json();
-    console.log(jresp);
+    console.log(JSON.stringify(jresp));
+
+    const holderAddress = jresp['assets'][0]['owner']['address'];
+    const userAddress = event.queryStringParameters.address;
+    console.log('userAddress', userAddress);
+    console.log('holderAddress', holderAddress);
+
+    var media = {};
+    if (userAddress == holderAddress) {
+      // if user matches holder, return the media paths
+      media = {
+        raw_media_path: 'https://filesamples.com/samples/audio/wav/Symphony%20No.6%20(1st%20movement).wav',
+        preview_media_path: 'https://filesamples.com/samples/audio/mp3/Symphony%20No.6%20(1st%20movement).mp3'
+      };
+    }
 
     return {
       statusCode: 201,
-      body: JSON.stringify({ media: {foo: 'foo'}})
+      body: JSON.stringify({ media: media})
     }
 
     // Getting the latest details on the token holder
