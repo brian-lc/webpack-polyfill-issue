@@ -17,7 +17,7 @@ class HolderMedia extends React.Component {
       'priceless-mayer-402b9f.netlify.app/.netlify/functions';
 
     // after mounting query to determine if we should display content 
-    fetch(`https://${NETLIFY_FUNC}/check-owners?address=${userAccount}`)
+    fetch(`https://${NETLIFY_FUNC}/check-ownership?address=${userAccount}`)
       .then(resp => resp.json())
       .then(resp => {
         this.setState({ media: resp['media'] });
