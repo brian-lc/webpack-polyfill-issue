@@ -8,7 +8,6 @@ const handler = async (event) => {
     const assetContract = '0x97ca7fe0b0288f5eb85f386fed876618fb9b8ab8';
     const tokenId = '3956';
     const queryFragment = `asset_contract_addresses=${assetContract}&token_ids=${tokenId}`;
-    var holderAddress = null;
 
     console.log('query', queryFragment);
 
@@ -17,11 +16,11 @@ const handler = async (event) => {
       order_direction=desc&
       offset=0&
       limit=20&${queryFragment}`, options)
+      .then(response => response.json())
       .then(response => {
 
         console.log('OpenSeaResponse', response);
-        const tokenDetail = JSON.parse(response.body);
-        holderAddress = tokenDetail['assets'][0]['owner']['address'];
+        const holderAddress = response['assets'][0]['owner']['address'];
 
         // Pulling the userAddress from the query params
         const userAddress = event.queryStringParameters.address;
@@ -39,10 +38,7 @@ const handler = async (event) => {
         return {
           statusCode: 200,
           body: JSON.stringify({ media: media }),
-          // headers: { "headerName": "headerValue", ... },
-          // isBase64Encoded: true,
         }
-
       })
       .catch(err => console.error(err));
     
