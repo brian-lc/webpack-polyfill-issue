@@ -12,32 +12,26 @@ class HolderMedia extends React.Component {
  }
 
  componentDidMount() {
-    // Setup wallet connect objects
     const { userAccount } = this.state;
     const NETLIFY_FUNC =
       'priceless-mayer-402b9f.netlify.app/.netlify/functions';
 
-     fetch(`https://${NETLIFY_FUNC}/check-ownership?address=${userAccount}`
-      )
-      .then(x => x.json())
-      .then(x => {
-        console.log('HERE', x);
+    // after mounting query to determine if we should display content 
+    fetch(`https://${NETLIFY_FUNC}/check-owners?address=${userAccount}`)
+      .then(resp => resp.json())
+      .then(resp => {
+        this.setState({ media: resp['media'] });
+        console.log('HERE', resp);
       })
-    
-    const media = {
-        raw_media_path: 'https://filesamples.com/samples/audio/wav/Symphony%20No.6%20(1st%20movement).wav',
-        preview_media_path: 'https://filesamples.com/samples/audio/mp3/Symphony%20No.6%20(1st%20movement).mp3'
-    };
-
-    this.setState({ media: media });
  }
 
  render() {
-    const { userAccount } = this.state;
+    const { userAccount, media } = this.state;
     return (
       <div>
         <h2>Media here</h2>
         <p>{ userAccount }</p>
+        <p>{JSON.toString(media)}</p>
         <AudioAsset />   
       </div>
     )
