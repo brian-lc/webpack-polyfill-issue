@@ -1,4 +1,6 @@
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
+const fetch = require('node-fetch');
+
 const handler = async (event) => {
   try {
     // Get holder address 
