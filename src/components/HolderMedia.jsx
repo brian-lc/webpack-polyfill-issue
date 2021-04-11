@@ -16,6 +16,7 @@ class HolderMedia extends React.Component {
     const NETLIFY_ROOT = 'https://priceless-mayer-402b9f.netlify.app/.netlify/functions';
 
     // after mounting query to determine if we should display content 
+    // Query the serverless function and provide the current user address
     fetch(`${NETLIFY_ROOT}/check-ownership?address=${userAccount}`)
       .then(resp => resp.json())
       .then(resp => {
