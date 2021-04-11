@@ -18,7 +18,7 @@ const handler = async (event) => {
 
     return {
       statusCode: 201,
-      body: JSON.stringify({ media: {foo: 'foo'}});
+      body: JSON.stringify({ media: {foo: 'foo'}})
     }
 
     // Getting the latest details on the token holder
