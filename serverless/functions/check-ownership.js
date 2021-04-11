@@ -5,14 +5,15 @@ const handler = async (event) => {
   try {
     // Get holder address 
     const options = {method: 'GET'};
-    const assetContract = '0x97ca7fe0b0288f5eb85f386fed876618fb9b8ab8';
-    const tokenId = '3956';
-    const queryFragment = `asset_contract_addresses=${assetContract}&token_ids=${tokenId}`;
-
-    console.log('query', queryFragment);
+    // const assetContract = '0x97ca7fe0b0288f5eb85f386fed876618fb9b8ab8';
+    // const tokenId = '3956';
+    // const queryFragment = `asset_contract_addresses=${assetContract}&token_ids=${tokenId}`;
+    const query = "https://api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=1&asset_contract_addresses=0x97ca7fe0b0288f5eb85f386fed876618fb9b8ab8&token_ids=3956";
+    
+    console.log('query', query);
 
     // Getting the latest details on the token holder
-    fetch(`https://api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=1&${queryFragment}`, options)
+    fetch(query, options)
       .then(response => response.json())
       .then(response => {
 

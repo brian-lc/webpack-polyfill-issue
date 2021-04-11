@@ -13,11 +13,12 @@ class HolderMedia extends React.Component {
 
  componentDidMount() {
     const { userAccount } = this.state;
-    const NETLIFY_FUNC =
-      'priceless-mayer-402b9f.netlify.app/.netlify/functions';
+    const NETLIFY_ROOT =
+      'http://localhost:51592/.netlify/functions';
+      //'https://priceless-mayer-402b9f.netlify.app/.netlify/functions';
 
     // after mounting query to determine if we should display content 
-    fetch(`https://${NETLIFY_FUNC}/check-ownership?address=${userAccount}`)
+    fetch(`${NETLIFY_ROOT}/check-ownership?address=${userAccount}`)
       .then(resp => resp.json())
       .then(resp => {
         this.setState({ media: resp['media'] });
