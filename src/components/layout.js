@@ -18,6 +18,7 @@ const Layout = ({ children }) => {
       site {
         siteMetadata {
           title
+          build
         }
       }
     }
@@ -42,6 +43,12 @@ const Layout = ({ children }) => {
           © {new Date().getFullYear()}, Built with
           {` `}
           <a href="https://www.gatsbyjs.com">Gatsby</a>
+          <p>
+            <ul>
+              <li>build: {data.site.siteMetadata?.build}</li>
+              <li>build_d: {process.env.DEPLOY_ID || 'foo'}</li>
+            </ul>
+          </p>
         </footer>
       </div>
     </>
