@@ -3,7 +3,7 @@ module.exports = {
     title: `Holder Media Content`,
     description: `Unlock your wallet to check if you have tokens for additional media.`,
     author: `@breakpointer`,
-    build: `${process.env.DEPLOY_ID || 'dev-head'}`,
+    build: `${process.env.DEPLOY_ID || 'dev'}`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -29,9 +29,5 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
-    `gatsby-plugin-gatsby-cloud`,
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
 }

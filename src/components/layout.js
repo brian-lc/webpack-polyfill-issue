@@ -46,7 +46,6 @@ const Layout = ({ children }) => {
           <p>
             <ul>
               <li>build: {data.site.siteMetadata?.build}</li>
-              <li>build_d: {process.env.DEPLOY_ID || 'foo'}</li>
             </ul>
           </p>
         </footer>
