@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactAudioPlayer from 'react-audio-player';
 
 class HolderMedia extends React.Component {
 
@@ -30,6 +31,14 @@ class HolderMedia extends React.Component {
         <h2>Media here</h2>
         <p>{ userAccount }</p>
         <p>{ JSON.stringify(media) }</p>
+        <ReactAudioPlayer
+          src={ media.preview_media_url }
+          autoPlay
+          controls
+        />
+        <p>
+          <a href={ media.raw_media_url } download> Download High Quality Version</a>
+        </p>
       </div>
     )
   };

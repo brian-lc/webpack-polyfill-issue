@@ -17,6 +17,7 @@
     "node-polyfill-webpack-plugin": "^1.1.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
+    "react-audio-player": "^0.16.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0"
   },
@@ -30,7 +31,6 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format": "lint --fix \"**/*.{js,jsx}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
